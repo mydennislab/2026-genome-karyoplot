@@ -1,0 +1,15 @@
+[project]
+name = "genome-karyotype"
+version = "0.1.0"
+description = "Publication-quality linear karyotype ideogram with stacked repeat density"
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-arm64"]
+
+[dependencies]
+python = ">=3.10"
+numpy = ">=1.24"
+matplotlib = ">=3.7"
+
+[tasks]
+generate-test-data = "python example/generate_test_data.py"
+example = { cmd = "python plot_linear_karyotype.py --chrom-sizes example/chrom.sizes --centromere example/centromeres.bed --tidk example/tidk.tsv --gaps example/gaps.bed --repeatmasker example/repeats.out --segdups example/segdups.bedpe -o example/output -t 'Example Karyotype'", depends-on = ["generate-test-data"] }
